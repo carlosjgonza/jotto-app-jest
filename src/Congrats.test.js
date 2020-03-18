@@ -7,9 +7,8 @@ import { findByTestAttr, checkProps } from '../test/testUtils';
 const defaultProps = { success: false };
 
 /**
- * Setup is a factory function to create a shallowWrapper for the component passed as parameter
+ * Setup is a factory function to create a shallowWrapper for Congrats.
  * @function
- * @param {JSX.Element} Component - Component to generate ShallowWrapper.
  * @param {object} props - Component props specific to this setup.
  * @returns {ShallowWrapper}
  */

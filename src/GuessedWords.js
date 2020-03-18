@@ -8,8 +8,33 @@ const GuessedWords = (props) => {
       {
         guessedWords.length === 0 ?
         <span data-test="guess-instructions">Try to guess the secret word!</span> :
-        <div>
-          {/* TODO - Table with guessed words */}
+        <div data-test="guessed-words">
+          <h3>Guessed Words</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Guessed Word</th>
+                <th>Matching Letters</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                guessedWords.map((guessedWord, key) => (
+                  <tr
+                    data-test="guessed-word"
+                    key={`word-${key}`}
+                  >
+                    <td>
+                      { guessedWord.guessedWord }
+                    </td>
+                    <td>
+                      { guessedWord.letterMatchCount }
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
         </div>
       }
     </div>

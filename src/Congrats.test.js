@@ -8,6 +8,8 @@ import { findByTestAttr, checkProps } from '../test/testUtils';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
+const defaultProps = { success: false };
+
 /**
  * Setup is a factory function to create a shallowWrapper for the component passed as parameter
  * @function
@@ -16,7 +18,8 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
  * @returns {ShallowWrapper}
  */
 const setup = (props={}) => {
-  return shallow(<Congrats {...props} />);
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />);
 }
 
 test('Renders without errors', () => {

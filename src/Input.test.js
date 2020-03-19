@@ -14,13 +14,25 @@ const setup = (initialState={}) => {
   return shallow(<Input store={store} />).dive().dive();
 }
 
-setup();
-
 describe('Render', () => {
   describe('Word has not been guessed', () => {
-    test('Render component without error', () => {});
-    test('Render input box', () => {});
-    test('Render submit button', () => {});
+    let wrapper;
+    beforeEach(() => {
+      const initialState = { success: false };
+      wrapper = setup(initialState);
+    });
+    test('Render component without error', () => {
+      const component = findByTestAttr(wrapper, 'component-input');
+      expect(component.length).toBe(1);
+    });
+    test('Render input box', () => {
+      const inputBox = findByTestAttr(wrapper, 'input-box');
+      expect(inputBox.length).toBe(1);
+    });
+    test('Render submit button', () => {
+      const submitButton = findByTestAttr(wrapper, 'submit-button');
+      expect(submitButton.length).toBe(1);
+    });
   });
   describe('Word has been guessed', () => {
     test('Render component without error', () => {});

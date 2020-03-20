@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 
 import Congrats from './Congrats';
 import GuessedWords from './GuessedWords';
+import Input from './Input';
 import { getSecretWord } from './actions';
 import './App.css';
 
 class App extends Component {
   render() {
-    const guessedWordsTest = [
-      { guessedWord: "train", letterMatchCount: 3 },
-      { guessedWord: "agile", letterMatchCount: 1 }
-    ];
+    const { success, guessedWords } = this.props;
     return (
       <div className="container">
         <h1>Jotto</h1>
-        <Congrats success={true} />
-        <GuessedWords guessedWords={guessedWordsTest} />
+        <Congrats success={success} />
+        <Input success={success} />
+        <GuessedWords guessedWords={guessedWords} />
       </div>
     );
   }

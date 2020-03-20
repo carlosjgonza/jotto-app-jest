@@ -1,3 +1,5 @@
+import { actionTypes } from '../actions';
+
 /**
  * @function SecretWordReducer
  * @param {array} state - Array of guessed words
@@ -5,5 +7,9 @@
  * @returns {boolean} - New Success State
  */
 export default (state=null, action) => {
-  return state;
+  switch(action.type) {
+    case actionTypes.SET_SECRET_WORD:
+      return action.payload;
+    default: return state;
+  }
 }

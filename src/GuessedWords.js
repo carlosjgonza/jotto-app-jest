@@ -13,17 +13,19 @@ const GuessedWords = (props) => {
           <table className="table table-sm">
             <thead className="thead-light">
               <tr>
+                <th>#</th>
                 <th>Guessed Word</th>
                 <th>Matching Letters</th>
               </tr>
             </thead>
             <tbody>
               {
-                guessedWords.map((guessedWord, key) => (
+                guessedWords.map((guessedWord, index) => (
                   <tr
                     data-test="guessed-word"
-                    key={`word-${key}`}
+                    key={`word-${index}`}
                   >
+                    <td>{index + 1}</td>
                     <td>
                       { guessedWord.guessedWord }
                     </td>
@@ -37,6 +39,7 @@ const GuessedWords = (props) => {
           </table>
         </div>
       }
+      
     </div>
   );
 };

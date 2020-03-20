@@ -23,7 +23,7 @@ export class UnconnectedApp extends Component {
       <div className="container">
         <h1>Jotto</h1>
         <div>The secret word is {secretWord}</div>
-        <Congrats success={success} />
+        <Congrats />
         <Input success={success} />
         <GuessedWords guessedWords={guessedWords} />
         <NumberGuess countWords={guessedWords.length} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { resetGame } from './actions';
+import { getSecretWord, resetGame } from './actions';
 
 /**
  * Functional react component for congratulatory message.
@@ -11,6 +11,11 @@ import { resetGame } from './actions';
  * @returns {JSX.Element} - Rendered component (or null if 'success' prop is false)
  */
 export class UnconnectedCongrats extends Component {
+  handleReset = () => {
+    const { getSecretWord, resetGame } = this.props;
+    resetGame();
+    getSecretWord();
+  }
   render() {
     const { secretWord, success, resetGame } = this.props;
     return (
@@ -24,7 +29,7 @@ export class UnconnectedCongrats extends Component {
           <button
             data-test="congrats-button"
             className="btn btn-primary"
-            onClick={resetGame}
+            onClick={this.handleReset}
             type="button"
           >
             New Word
@@ -56,4 +61,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { resetGame })(UnconnectedCongrats);
+export default connect(mapStateToProps, { resetGame, getSecretWord })(UnconnectedCongrats);

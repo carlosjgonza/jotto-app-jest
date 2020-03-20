@@ -64,34 +64,42 @@ describe('Events', () => {
   let store;
   let wrapper;
   let resetGameMock;
+  let getSecretWordMock;
   const initialState = {
     guessedWords: [
       { guessedWord: "train", letterMatchCount: 3 },
       { guessedWord: "agile", letterMatchCount: 1 },
       { guessedWord: "party", letterMatchCount: 5 },
     ],
-    secretWord: '',
+    secretWord: 'party',
     success: true,
   };
   beforeEach(() => {
     // Setting up mock for `guessWord`
     resetGameMock = jest.fn();
+    getSecretWordMock = jest.fn();
     const props = {
       resetGame: resetGameMock,
+      getSecretWord: getSecretWordMock,
       ...initialState,
     };
 
     store = storeFactory(initialState);
     wrapper = shallow(<UnconnectedCongrats {...props} />);
-  });
-  test('`New word` is executed when button is clicked', () => {
+
     // Get button and execute click
     const button = findByTestAttr(wrapper, 'congrats-button');
     button.simulate('click');
-
+  });
+  test('`resetGame` is executed when button is clicked', () => {
     // Check times called mock method
     const resetGameCallCount = resetGameMock.mock.calls.length;
     expect(resetGameCallCount).toBe(1);
+  });
+  test('`getSecretWord` is executed when button is clicked', () => {
+    // Check times called mock method
+    const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+    expect(getSecretWordCallCount).toBe(1);
   });
   test('`reset game` update state to initial values', () => {
     // Dispatch reset game
@@ -99,7 +107,7 @@ describe('Events', () => {
     const newState = store.getState();
     const expectedState = {
       guessedWords: [],
-      secretWord: '',
+      secretWord: null,
       success: false,
     };
     expect(newState).toEqual(expectedState);

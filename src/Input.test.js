@@ -98,4 +98,7 @@ describe('Events', () => {
     const guessWordArg = guessWordMock.mock.calls[0][0];
     expect(guessWordArg).toBe(guessedWord);
   });
+  test('`guessWord` clear input box after button is clicked', () => {
+    expect(wrapper.state('guessWordText')).toBe('');
+  });
 });

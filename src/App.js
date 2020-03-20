@@ -17,10 +17,11 @@ export class UnconnectedApp extends Component {
     getSecretWord();
   };
   render() {
-    const { success, guessedWords } = this.props;
+    const { secretWord, success, guessedWords } = this.props;
     return (
       <div className="container">
         <h1>Jotto</h1>
+        <div>The secret word is {secretWord}</div>
         <Congrats success={success} />
         <Input success={success} />
         <GuessedWords guessedWords={guessedWords} />

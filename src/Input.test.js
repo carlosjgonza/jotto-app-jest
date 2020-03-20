@@ -68,22 +68,34 @@ describe('Props', () => {
   });
 });
 describe('Events', () => {
-  test('`guessWord` is executed when button is clicked', () => {
-    const guessWordMock = jest.fn();
+  let guessWordMock;
+  let wrapper;
+  const guessedWord = 'train';
+  beforeEach(() => {
+    // Setting up mock for `guessWord`
+    guessWordMock = jest.fn();
     const props = {
       success: false,
       guessWord: guessWordMock,
     };
 
     // Setup Input component with mock method guessWord
-    const wrapper = shallow(<UnconnectedInput {...props} />);
+    wrapper = shallow(<UnconnectedInput {...props} />);
+
+    // Add value to input box
+    wrapper.setState({ guessWordText: guessedWord });
 
     // Get button in Input component and execute click
     const button = findByTestAttr(wrapper, 'submit-button');
-    button.simulate('click');
-
+    button.simulate('click', { preventDefault() {} });
+  });
+  test('`guessWord` is executed when button is clicked', () => {
     // Check times called mock method
     const guessWordCallCount = guessWordMock.mock.calls.length;
     expect(guessWordCallCount).toBe(1);
+  });
+  test('`guessWord` is executed with the correct parameters', () => {
+    const guessWordArg = guessWordMock.mock.calls[0][0];
+    expect(guessWordArg).toBe(guessedWord);
   });
 });
